@@ -14,38 +14,12 @@
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js"></script>
 	  <script src="Far.js"></script>
 	  <script src="Mid.js"></script>
+	  <script src="Scroller.js"></script>
+	  <script src="Main.js"></script>
 	  <script>
-	  let stage, renderer, far, mid;
-	  function init(){
-	  	
-	  	stage = new PIXI.Container();
-
-		renderer = PIXI.autoDetectRenderer(
-		    512,
-		    384,
-		    {view:document.getElementById("game-canvas")}
-		  );
-
-    	
-    	far = new Far();
-  		stage.addChild(far);
-
-
-  		 mid = new Mid();
-		 stage.addChild(mid);
-
-
-  		 requestAnimationFrame(update);
-       }
-
-       function update() {
-		  far.tilePosition.x -= 0.128;
-		  mid.tilePosition.x -= 0.64;
-
-		  renderer.render(stage);
-
-		  requestAnimationFrame(update);
-		}
+	  	function init() {
+    		main = new Main();
+  		}
 		</script>
 	  </script>
   </body>
