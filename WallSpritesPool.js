@@ -1,11 +1,39 @@
+/*
+A typical wall span consists of three major parts:
+
+A front edge
+A mid section
+A back edge
+
+A wall’s mid section is made from the following two parts continuously chained together:
+
+A Window
+A Wall decoration
+
+There are 8 slice types:
+1. Front Edge
+2. Back Edge
+3. Window - lit
+4. Window - unlit
+5. Wall decoration - 1
+6. Wall decoration - 2
+7. Wall decoration - 3
+8. Step
+
+Dimensions. Each slice is 256 pixels high (and 64 width?)
+*/
+
 function WallSpritesPool() {
   this.createWindows();
   this.createDecorations();
   this.createFrontEdges();
   this.createBackEdges();
+  this.createSteps();
 }
 
-
+/* 	--------------------
+	Public Methods
+	-------------------- */
 WallSpritesPool.prototype.borrowWindow = function() {
   return this.windows.shift();
 };
@@ -39,6 +67,17 @@ WallSpritesPool.prototype.returnBackEdge = function(sprite) {
   this.backEdges.push(sprite);
 };
 
+WallSpritesPool.prototype.borrowStep = function() {
+  return this.steps.shift();
+};
+
+WallSpritesPool.prototype.returnStep = function(sprite) {
+  this.steps.push(sprite);
+};
+
+/* 	--------------------
+	Create 
+	-------------------- */
 WallSpritesPool.prototype.createWindows = function() {
   this.windows = [];
   /*
@@ -87,6 +126,15 @@ WallSpritesPool.prototype.createBackEdges = function() {
   this.shuffle(this.backEdges);
 };
 
+WallSpritesPool.prototype.createSteps = function() {
+  this.steps = [];
+  this.addStepSprites(2, "step_01");
+};
+
+
+/* 	--------------------
+	Add 
+	-------------------- */
 WallSpritesPool.prototype.addWindowSprites = function(amount, frameId) {
   for (var i = 0; i < amount; i++)
   {
@@ -123,7 +171,18 @@ WallSpritesPool.prototype.addBackEdgeSprites = function(amount, frameId) {
   }
 };
 
+WallSpritesPool.prototype.addStepSprites = function(amount, frameId) {
+  for (var i = 0; i < amount; i++)
+  {
+    var sprite = new PIXI.Sprite(PIXI.Texture.fromFrame(frameId));
+    sprite.anchor.y = 0.25;
+    this.steps.push(sprite);
+  }
+};
 
+/* 	--------------------
+	Shuffle 
+	-------------------- */
 WallSpritesPool.prototype.shuffle = function(array) {
   var len = array.length;
   var shuffles = len * 3;

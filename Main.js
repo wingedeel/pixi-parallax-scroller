@@ -54,11 +54,20 @@ Main.prototype.generateTestWallSpan = function() {
     this.pool.borrowFrontEdge,  // 1st slice
     this.pool.borrowWindow,     // 2nd slice
     this.pool.borrowDecoration, // 3rd slice
-    this.pool.borrowWindow,     // 4th slice
-    this.pool.borrowDecoration, // 5th slice
-    this.pool.borrowWindow,     // 6th slice
-    this.pool.borrowBackEdge    // 7th slice
+    this.pool.borrowStep,       // 4th slice
+    this.pool.borrowWindow,     // 5th slice
+    this.pool.borrowBackEdge    // 6th slice
   ];
+
+  var yPos = [
+    128, // 1st slice
+    128, // 2nd slice
+    128, // 3rd slice
+    192, // 4th slice
+    192, // 5th slice
+    192  // 6th slice
+  ];
+
   for (var i = 0; i < lookupTable.length; i++)
   {
     var func = lookupTable[i];
@@ -70,8 +79,8 @@ Main.prototype.generateTestWallSpan = function() {
     this.pool.borrowFrontEdge();
     */
     var sprite = func.call(this.pool);
-    sprite.position.x = 32 + (i * 64);
-    sprite.position.y = 128;
+    sprite.position.x = 64 + (i * 64);
+    sprite.position.y = yPos[i];
 
     this.wallSlices.push(sprite);
 
