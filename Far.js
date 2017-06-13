@@ -13,8 +13,10 @@ function Far() {
   we need to remember to initialise the TilingSprite functionality. 
   That’s done by calling the TilingSprite class’ constructor from within 
   our own class’ constructor. 
+  Here we are calling a pre-made instance?
   */
   PIXI.extras.TilingSprite.call(this, texture, 512, 256);
+
   this.position.x = 0;
   this.position.y = 0;
   this.tilePosition.x = 0;
@@ -24,7 +26,7 @@ function Far() {
 }
 
 // Inherit the features of the PIXI.extras.TilingSprite class.
-// Use Object.create to create an object with a specific prototype
+// Use Object.create to create an object with this specific prototype
 Far.prototype = Object.create(PIXI.extras.TilingSprite.prototype);
 
 Far.DELTA_X = 0.128;
